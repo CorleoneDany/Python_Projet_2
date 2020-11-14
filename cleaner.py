@@ -10,4 +10,4 @@ class Cleaner:
         collector.donnees["Price_b_tax"] = collector.donnees["Price_b_tax"].strip("Â£")
         collector.donnees["Price_a_tax"] = collector.donnees["Price_a_tax"].strip("Â£")
         collector.donnees["Tax"] = collector.donnees["Tax"].strip("Â£")
-        collector.donnees["Image_URL"] = collector.donnees["Image_URL"].strip("../../media/cache/fe/72/")
+        collector.donnees["Image_URL"] = collector.donnees["Image_URL"].strip("../")

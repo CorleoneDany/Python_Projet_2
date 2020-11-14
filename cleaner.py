@@ -5,5 +5,9 @@ class Cleaner:
         pass
 
     def clean(self, collector):
-        cleaner.titre = ""
-        cleaner.information = ""
+        collector.donnees["Link"] = collector.donnees["Link"].strip("https://books.toscrape.com")
+        collector.donnees["Availability"] = collector.donnees["Availability"].strip("In stock (").strip(")")
+        collector.donnees["Price_b_tax"] = collector.donnees["Price_b_tax"].strip("Â£")
+        collector.donnees["Price_a_tax"] = collector.donnees["Price_a_tax"].strip("Â£")
+        collector.donnees["Tax"] = collector.donnees["Tax"].strip("Â£")
+        collector.donnees["Image_URL"] = collector.donnees["Image_URL"].strip("")

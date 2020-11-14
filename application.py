@@ -10,7 +10,7 @@ website.requestWebsite()
 
 collector = Collector()
 
-collector.Collect(website)
+collector.collect(website)
 
 cleaner = Cleaner()
 

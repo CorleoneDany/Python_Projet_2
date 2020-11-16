@@ -18,23 +18,20 @@ class Collector:
             "Availability" : 0,
             "Review_count" : 0,
             "Image_URL" : "",
-            "Category" : "" #soup.findall ul, soup findall a 
+            "Category" : "", #soup.findall ul, soup findall a 
+            "Description" :"" 
         }
 
     def collect(self, website):
-        # i = 0
-        # n = 4
         soup = BeautifulSoup(website.content, features="html.parser")
         information_table = soup.find("table", {"class":"table table-striped"})
+        description = soup.find("article", {"class":"product_page"}).find("p", recursive=False).text
+        category = soup.find("ul", {"class":"breadcrumb"}).findAll("li")[2].text
         image = soup.find("img")
         star_numbers = soup.findAll("i", {"class":"icon-star"}, {"color" : "#E6CE31"}) #faux, à corriger element p star rating .find 
         for stars in star_numbers:
             self.data["Note"] +=1
         td_list = information_table.findAll("td")
-        # for td in td_list:
-        #     self.data.values()[n] = td_list[i].text
-        #     i = i+1
-        #     n = x+1
 
         self.data["Title"] = soup.find("h1").text
         self.data["Link"] = website.url
@@ -45,6 +42,6 @@ class Collector:
         self.data["Tax"] = td_list[4].text
         self.data["Availability"] = td_list[5].text
         self.data["Review_Count"] = td_list[6].content
-        self.data["Image_URL"] = image["src"] #chemin relatif, ok ? a voir pour la fonction d'enregistrement d'image plus tard 
-
-        # print(self.data)
+        self.data["Description"] = description
+        self.data["Category"] = category
+        self.data["Image_URL"] = image["src"]

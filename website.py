@@ -4,7 +4,7 @@ import requests
 
 class Website:
     def __init__(self):
-        self.page_number = "1"
+        page_number = "1"
         self.url = "https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html"  
         self.content = ""
 
@@ -15,6 +15,6 @@ class Website:
             print("Connection ok")
             print("La requête à retourné des informations : ")
             self.content = response.text
-        else raise exception():
+        else:
             print("La requête à retourné une erreur : ")
             print(requests.status_codes)

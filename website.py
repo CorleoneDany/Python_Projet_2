@@ -8,13 +8,13 @@ class Website:
         self.url = "https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html"  
         self.content = ""
 
-    def requestWebsite(self):
+    def request_Website(self):
         print("Tentative de connection à l'url books.toscrape.com")
         response = requests.get(self.url)
         if response.ok:
             print("Connection ok")
             print("La requête à retourné des informations : ")
             self.content = response.text
-        else:
+        else raise exception():
             print("La requête à retourné une erreur : ")
             print(requests.status_codes)

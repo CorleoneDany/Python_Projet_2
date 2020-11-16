@@ -2,8 +2,6 @@ import subprocess
 import sys
 from bs4 import BeautifulSoup
 
-#recuperer la product_description, le seul p inclu dans article 
-
 class Collector:
     def __init__(self):
         self.data = {
@@ -18,7 +16,7 @@ class Collector:
             "Availability" : 0,
             "Review_count" : 0,
             "Image_URL" : "",
-            "Category" : "", #soup.findall ul, soup findall a 
+            "Category" : "",
             "Description" :"" 
         }
 
@@ -28,9 +26,7 @@ class Collector:
         description = soup.find("article", {"class":"product_page"}).find("p", recursive=False).text
         category = soup.find("ul", {"class":"breadcrumb"}).findAll("li")[2].text
         image = soup.find("img")
-        star_numbers = soup.findAll("i", {"class":"icon-star"}, {"color" : "#E6CE31"}) #faux, à corriger element p star rating .find 
-        for stars in star_numbers:
-            self.data["Note"] +=1
+        star_numbers = soup.find("p", {"class":"star-rating"})["class"][1]
         td_list = information_table.findAll("td")
 
         self.data["Title"] = soup.find("h1").text
@@ -44,4 +40,5 @@ class Collector:
         self.data["Review_Count"] = td_list[6].content
         self.data["Description"] = description
         self.data["Category"] = category
+        self.data["Note"] = star_numbers
         self.data["Image_URL"] = image["src"]

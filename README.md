@@ -20,3 +20,7 @@ Les informations relevées seront les suivantes (dictées par le client) :
 et devront être sauvegardées dans un fichier CSV.
 
 Le projet sera développé en python et de préférence en orienté objet. 
+
+Pour lancer le projet, il suffira d'avoir python et git installé, 
+
+En premier lieu il faudra ouvrir le fichier V-env.sh qui installera l'environnement virtuel du projet automatiquement (dépendances incluses) puis ouvir l'application via __main__.py

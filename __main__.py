@@ -10,10 +10,12 @@ class Application:
             website = Website()
             collector = Collector()
             cleaner = Cleaner()
+            recorder = Recorder()
 
             website.request_Website()
             collector.collect(website) #prendre que le website.content et website.url seulement
             cleaner.clean(collector) #prendre le collector.data seulement
+            recorder.record(collector) #prendre le collector.data seulement
 
             pp.pprint(collector.data)
 

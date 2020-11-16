@@ -14,6 +14,7 @@ class Website:
         if response.ok:
             print("Connection ok")
             print("La requête à retourné des informations : ")
+            response.encoding = "utf-8"
             self.content = response.text
         else:
             print("La requête à retourné une erreur : ")

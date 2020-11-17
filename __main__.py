@@ -13,9 +13,9 @@ class Application:
             recorder = Recorder()
 
             website.request_Website()
-            collector.collect(website) #prendre que le website.content et website.url seulement
-            cleaner.clean(collector) #prendre le collector.data seulement
-            recorder.record(collector) #prendre le collector.data seulement
+            collector.collect(website.url, website.content) 
+            cleaner.clean(collector.data) 
+            recorder.record(collector.data) 
 
             pp.pprint(collector.data)
 

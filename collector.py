@@ -20,8 +20,8 @@ class Collector:
             "Description" :"" 
         }
 
-    def collect(self, website):
-        soup = BeautifulSoup(website.content, features="html.parser")
+    def collect(self, url, content):
+        soup = BeautifulSoup(content, features="html.parser")
         information_table = soup.find("table", {"class":"table table-striped"})
         description = soup.find("article", {"class":"product_page"}).find("p", recursive=False).text
         category = soup.find("ul", {"class":"breadcrumb"}).findAll("li")[2].text
@@ -30,7 +30,7 @@ class Collector:
         td_list = information_table.findAll("td")
 
         self.data["Title"] = soup.find("h1").text
-        self.data["Link"] = website.url
+        self.data["Link"] = url
         self.data["UPC"] = td_list[0].text
         self.data["Type"] = td_list[1].text
         self.data["Price_b_tax"] = td_list[2].text

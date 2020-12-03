@@ -5,8 +5,8 @@ class Recorder:
         pass
 
     def record(self, data):
-        csv_columns = data.keys()
-        with open(data["Category"] + ".csv", 'w') as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=csv_columns, delimiter=';')
-            writer.writeheader()
-            writer.writerow(data)
+            csv_columns = data.keys()
+            with open(data["category"] + ".csv", 'w') as csvfile:
+                writer = csv.DictWriter(csvfile, fieldnames=csv_columns, delimiter=';')
+                writer.writeheader()
+                writer.writerow(data)

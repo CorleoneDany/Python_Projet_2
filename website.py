@@ -84,5 +84,10 @@ class Website:
         for urls in self.url_list:
             self.content_list.append(self.request_book_html(urls))
 
-    def request_all_books(self):
-        pass
+    def request_all_books_url(self):
+        url = "https://books.toscrape.com/index.html"
+        main_page_html = requests.get(url)
+        soup = BeautifulSoup(main_page_html, features="html.parser")
+        url_category_list = soup.find("ul", {"class" : "nav nav-list"}).find("ul").findAll("li").find("a")["href"]
+        for category in url_category_list:
+            pass

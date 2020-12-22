@@ -32,10 +32,13 @@ class Application:
         self.cleaner.clean_data_from_list_of_books(self.collector.data_list)
         self.recorder.record_data_from_list_in_csv(self.collector.data_list)
 
+    def get_all_books(self):
+        self.website.request_all_books_from_category(self)
+
 
 if __name__ == "__main__":
 
     application = Application()
 
     # application.get_book()
-    application.get_category()
+    # application.get_category()

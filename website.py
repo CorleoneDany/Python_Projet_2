@@ -43,14 +43,15 @@ class Website:
             self.retrieve_urls_from_content(next_page_content)
 
             while self.has_next_page(next_page_content):
-                next_page_soup = BeautifulSoup(
-                    next_page_content.text, features="html.parser"
-                )
-                self.retrieve_urls_from_content(next_page_soup)
-                next_page_content = requests.get(
+                self.retrieve_urls_from_content(next_page_content)
+                next_page_html = requests.get(
                     self.load_next_page_url(next_page_content)
                 )
                 next_page_content.encoding = "utf-8"
+                next_page_content = BeautifulSoup(
+                next_page_html.text, features="html.parser"
+                )
+
 
         else:
             print("La requête à retourné une erreur : ")

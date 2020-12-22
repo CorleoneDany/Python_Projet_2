@@ -1,31 +1,43 @@
-import subprocess
-import sys
-from bs4 import BeautifulSoup
+"""Collect data."""
+
 
 class Collector:
     def __init__(self):
-        self.data = {
-            "link" : "",
-            "title" : "",
-            "note" : 0,
-            "upc" : "",
-            "type" : "",
-            "price_before_tax" : "",
-            "price_after_tax" : "",
-            "tax" : "",
-            "availability" : 0,
-            "review_count" : 0,
-            "image_url" : "",
-            "category" : "",
-            "description" :"" 
+        self.default = {
+            "link": "",
+            "title": "",
+            "note": 0,
+            "upc": "",
+            "type": "",
+            "price_before_tax": "",
+            "price_after_tax": "",
+            "tax": "",
+            "availability": 0,
+            "review_count": 0,
+            "image_url": "",
+            "category": "",
+            "description": "",
         }
 
-    def collect_book_data(self, url, content): 
-        information_table = content.find("table", {"class":"table table-striped"})
-        description = content.find("article", {"class":"product_page"}).find("p", recursive=False).text
-        category = content.find("ul", {"class":"breadcrumb"}).findAll("li")[2].text
+        self.data = {**self.default}
+
+        self.data_list = []
+
+    def collect_book_data(self, url, content):
+        """Collect book data from html.
+
+        Also get the image url.
+        """
+        self.data = {**self.default}
+        information_table = content.find("table", {"class": "table table-striped"})
+        description = (
+            content.find("article", {"class": "product_page"})
+            .find("p", recursive=False)
+            .text
+        )
+        category = content.find("ul", {"class": "breadcrumb"}).findAll("li")[2].text
         image_link = content.find("img")["src"]
-        star_numbers = content.find("p", {"class":"star-rating"})["class"][1]
+        star_numbers = content.find("p", {"class": "star-rating"})["class"][1]
         td_list = information_table.findAll("td")
 
         self.data["title"] = content.find("h1").text
@@ -42,6 +54,11 @@ class Collector:
         self.data["note"] = star_numbers
         self.data["image_url"] = image_link
 
-    def collect_data_from_list_of_books(self, content_list):
-        # Collecte les données des livres d'une liste de contenu html
-        pass
+        return self.data
+
+    def collect_data_from_list_of_books(self, url_list, content_list):
+        """Collect data from list of urls."""
+        i = 0
+        for content in content_list:
+            self.data_list.append(self.collect_book_data(url_list[i], content_list[i]))
+            i += 1

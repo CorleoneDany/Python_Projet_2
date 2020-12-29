@@ -58,7 +58,5 @@ class Collector:
 
     def collect_data_from_list_of_books(self, url_list, content_list):
         """Collect data from list of urls."""
-        i = 0
-        for content in content_list:
-            self.data_list.append(self.collect_book_data(url_list[i], content_list[i]))
-            i += 1
+        for content in range(len(content_list)):
+            self.data_list.append(self.collect_book_data(url_list[content], content_list[content]))

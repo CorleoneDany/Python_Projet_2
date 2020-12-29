@@ -19,14 +19,10 @@ class Cleaner:
         return data
 
     def clean_data_from_list_of_books(self, data_list):
-        i = 0
-        for data in data_list:
-            data_list[i] = self.clean_data_from_book(data_list[i])
-            i += 1
+        for data in range(len(data_list)):
+            data_list[data] = self.clean_data_from_book(data_list[data])
 
     def clean_url_list(self, url_list):
         path = "https://books.toscrape.com/catalogue"
-        i = 0
-        for urls in url_list:
-            url_list[i] = url_list[i].replace("../../..", path)
-            i += 1
+        for urls in range(len(url_list)):
+            url_list[urls] = url_list[urls].replace("../../..", path)

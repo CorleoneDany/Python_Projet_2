@@ -33,7 +33,7 @@ class Application:
         self.recorder.record_data_from_list_in_csv(self.collector.data_list)
 
     def get_all_books(self):
-        self.website.request_all_books_from_category(self)
+        self.website.request_all_books_url()
 
 
 if __name__ == "__main__":
@@ -42,3 +42,5 @@ if __name__ == "__main__":
 
     # application.get_book()
     # application.get_category()
+
+    application.get_all_books()

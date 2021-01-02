@@ -6,16 +6,16 @@ Le projet consiste à développer un parseur d'information qui nous servira à r
 
 Les informations relevées seront les suivantes (dictées par le client) : 
 
-+product_page_url
-+universal_ product_code (upc)
-+title
-+price_including_tax
-+price_excluding_tax
-+number_available
-+product_description
-+category
-+review_rating
-+image_url
++ product_page_url
++ universal_ product_code (upc)
++ title
++ price_including_tax
++ price_excluding_tax
++ number_available
++ product_description
++ category
++ review_rating
++ image_url
 
 et devront être sauvegardées dans un fichier CSV.
 

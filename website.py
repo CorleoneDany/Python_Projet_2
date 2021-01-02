@@ -86,7 +86,7 @@ class Website:
     def request_category_content(self, url_list):
         """Return content of all books in a category."""
         for urls in self.url_list:
-            self.content_list.append(self.request_book_html(urls))
+            self.content_list.append(self.request_book_content(urls))
 
     def request_all_categories_url(self):
         """Return the urls of all categories from the index."""

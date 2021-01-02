@@ -6,6 +6,7 @@ class Cleaner:
         pass
 
     def clean_data_from_book(self, data):
+        """Clean data from collector."""
         title = data["title"]
         only_alnum = [char for char in title if char.isalnum()]
         data["title"] = "".join(only_alnum)
@@ -22,10 +23,12 @@ class Cleaner:
         return data
 
     def clean_data_from_list_of_books(self, data_list):
+        """Clean data in a list of data books from collector."""
         for data in range(len(data_list)):
             data_list[data] = self.clean_data_from_book(data_list[data])
 
     def clean_url_list(self, url_list):
+        """Clean urls in a list of urls."""
         path = "https://books.toscrape.com/catalogue"
         for urls in range(len(url_list)):
             url_list[urls] = url_list[urls].replace("../../..", path)

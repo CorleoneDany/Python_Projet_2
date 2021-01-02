@@ -1,8 +1,9 @@
+"""Main class of the program."""
+
 from collector import Collector
 from cleaner import Cleaner
 from website import Website
 from recorder import Recorder
-import pprint as pp
 
 
 class Application:
@@ -13,7 +14,8 @@ class Application:
         self.recorder = Recorder()
 
     def get_book(self):
-        self.website.request_book_html(
+        """Get data from one book in a CSV."""
+        self.website.request_book_content(
             "https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html"
         )
         self.collector.collect_book_data(self.website.url, self.website.content)
@@ -21,9 +23,10 @@ class Application:
         self.recorder.record_data_in_csv_file(self.collector.data)
 
     def get_category(self, url):
+        """Get data from all the books in a category to a CSV."""
         self.website.request_category_urls(url)
         self.cleaner.clean_url_list(self.website.url_list)
-        self.website.request_category_html(self.website.url_list)
+        self.website.request_category_content(self.website.url_list)
         self.collector.collect_data_from_list_of_books(
             self.website.url_list, self.website.content_list
         )
@@ -33,6 +36,7 @@ class Application:
         self.collector.data_list.clear()
 
     def get_all_books(self):
+        """Get data from all the books contained in bookstoscrape."""
         url_list = self.website.request_all_categories_url()
         for urls in range(len(url_list)):
             self.get_category(url_list[urls])

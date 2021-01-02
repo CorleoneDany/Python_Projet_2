@@ -6,6 +6,9 @@ class Cleaner:
         pass
 
     def clean_data_from_book(self, data):
+        title = data["title"]
+        only_alnum = [char for char in title if char.isalnum()]
+        data["title"] = "".join(only_alnum)
         data["link"] = data["link"].replace("https://books.toscrape.com/catalogue/", "")
         data["category"] = data["category"].strip("\n")
         data["availability"] = (

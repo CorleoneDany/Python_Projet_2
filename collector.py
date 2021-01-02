@@ -30,11 +30,14 @@ class Collector:
         """
         self.data = {**self.default}
         information_table = content.find("table", {"class": "table table-striped"})
-        description = (
-            content.find("article", {"class": "product_page"})
-            .find("p", recursive=False)
-            .text
-        )
+        try:
+            description = (
+                content.find("article", {"class": "product_page"})
+                .find("p", recursive=False)
+                .text
+            )
+        except AttributeError:
+            description = "None"
         category = content.find("ul", {"class": "breadcrumb"}).findAll("li")[2].text
         image_link = content.find("img")["src"]
         star_numbers = content.find("p", {"class": "star-rating"})["class"][1]
@@ -59,4 +62,6 @@ class Collector:
     def collect_data_from_list_of_books(self, url_list, content_list):
         """Collect data from list of urls."""
         for content in range(len(content_list)):
-            self.data_list.append(self.collect_book_data(url_list[content], content_list[content]))
+            self.data_list.append(
+                self.collect_book_data(url_list[content], content_list[content])
+            )

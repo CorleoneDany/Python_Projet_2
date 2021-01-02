@@ -1,6 +1,7 @@
 """Collect urls and html."""
 
 import requests
+from requests.exceptions import MissingSchema
 from bs4 import BeautifulSoup
 
 
@@ -39,23 +40,23 @@ class Website:
                 next_page_html = requests.get(self.load_next_page_url(self.content))
                 next_page_html.encoding = "utf-8"
                 next_page_content = BeautifulSoup(
-                next_page_html.text, features="html.parser"
-            )
+                    next_page_html.text, features="html.parser"
+                )
                 self.retrieve_urls_from_content(next_page_content)
 
                 while self.has_next_page(next_page_content):
                     self.retrieve_urls_from_content(next_page_content)
                     next_page_html = requests.get(
-                    self.load_next_page_url(next_page_content)
-                )
+                        self.load_next_page_url(next_page_content)
+                    )
                     next_page_content.encoding = "utf-8"
                     next_page_content = BeautifulSoup(
-                    next_page_html.text, features="html.parser"
-                )
+                        next_page_html.text, features="html.parser"
+                    )
 
-            except AttributeError:
+            except MissingSchema:
                 pass
-                
+
         else:
             print("La requête à retourné une erreur : ")
             print(requests.status_codes)
@@ -87,14 +88,15 @@ class Website:
         for urls in self.url_list:
             self.content_list.append(self.request_book_html(urls))
 
-    def request_all_books_url(self):
+    def request_all_categories_url(self):
         domain = "https://books.toscrape.com/"
         main_page_html = requests.get("https://books.toscrape.com/index.html")
         main_page_html.encoding = "utf-8"
         soup = BeautifulSoup(main_page_html.text, features="html.parser")
-        url_category_list = soup.find("ul", {"class" : "nav nav-list"}).find("ul").findAll("li")
+        url_category_list = (
+            soup.find("ul", {"class": "nav nav-list"}).find("ul").findAll("li")
+        )
         for category in range(len(url_category_list)):
             url_category_list[category] = url_category_list[category].find("a")["href"]
             url_category_list[category] = domain + url_category_list[category]
-            self.request_category_urls(url_category_list[category])
-            self.request_category_html(url_category_list[category])
+        return url_category_list

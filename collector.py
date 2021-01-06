@@ -2,7 +2,10 @@
 
 
 class Collector:
+    """Collect data."""
+
     def __init__(self):
+        """Init class with attributes."""
         self.default = {
             "link": "",
             "title": "",

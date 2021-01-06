@@ -6,7 +6,10 @@ import requests
 
 
 class Recorder:
+    """Record data."""
+
     def __init__(self):
+        """Init class with attributes."""
         pass
 
     def record_data_in_csv_file(self, data):

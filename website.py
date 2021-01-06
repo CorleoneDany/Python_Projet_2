@@ -6,14 +6,17 @@ from bs4 import BeautifulSoup
 
 
 class Website:
+    """Collect urls and html."""
+
     def __init__(self):
+        """Init class with attributes."""
         self.url = ""
         self.content = ""
         self.url_list = []
         self.content_list = []
 
     def request_book_content(self, url):
-        """Returns content of a page from an url."""
+        """Return content of a page from an url."""
         self.url = url
         print("Tentative de connection à l'url books.toscrape.com")
         response = requests.get(self.url)
@@ -27,6 +30,8 @@ class Website:
         else:
             print("La requête à retourné une erreur : ")
             print(requests.status_codes)
+
+            # Lors d'un input / output toujours faire un try except
 
     def request_category_urls(self, url):
         """Return all the books's urls from a category."""

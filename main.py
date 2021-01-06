@@ -7,7 +7,10 @@ from recorder import Recorder
 
 
 class Application:
+    """Main class of the program."""
+
     def __init__(self):
+        """Init class with attributes."""
         self.website = Website()
         self.collector = Collector()
         self.cleaner = Cleaner()
@@ -40,6 +43,11 @@ class Application:
         url_list = self.website.request_all_categories_url()
         for urls in range(len(url_list)):
             self.get_category(url_list[urls])
+
+    # ajouter un menu pour lancer get_book / get_category / get_all_books
+    def menu(self):
+        """Show a menu to choose a method."""
+        pass
 
 
 if __name__ == "__main__":

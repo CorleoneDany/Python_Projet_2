@@ -2,7 +2,10 @@
 
 
 class Cleaner:
+    """Clean data from other classes."""
+
     def __init__(self):
+        """Init class with attributes."""
         pass
 
     def clean_data_from_book(self, data):
